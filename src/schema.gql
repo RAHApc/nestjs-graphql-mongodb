@@ -1,0 +1,136 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CompanyEntity {
+  name: String!
+  jobs: [JobEntity!]
+}
+
+type JobEntity {
+  title: String!
+  level: Level!
+  unit: String!
+  superior: String!
+  company: CompanyEntity!
+}
+
+"""Level of title"""
+enum Level {
+  Level1
+  Level2
+}
+
+type GetJobsOutput {
+  message: String!
+  ok: Boolean!
+  jobs: [JobEntity!]
+}
+
+type GetJobOutput {
+  message: String!
+  ok: Boolean!
+  job: JobEntity
+}
+
+type CreateJobOutput {
+  message: String!
+  ok: Boolean!
+  job: JobEntity
+}
+
+type UpdateJobOutput {
+  message: String!
+  ok: Boolean!
+  job: JobEntity
+}
+
+type GetCompaniesOutput {
+  message: String!
+  ok: Boolean!
+  company: [CompanyEntity!]
+}
+
+type GetCompanyOutput {
+  message: String!
+  ok: Boolean!
+  company: CompanyEntity
+}
+
+type CreateCompanyOutput {
+  message: String!
+  ok: Boolean!
+  name: String
+}
+
+type UpdateCompanyOutput {
+  message: String!
+  ok: Boolean!
+  company: CompanyEntity
+}
+
+type UserOutput {
+  message: String!
+  ok: Boolean!
+  email: String!
+  role: String!
+  token: String!
+}
+
+type Query {
+  me: UserOutput!
+  getJobs: GetJobsOutput!
+  getJobById(id: String!): GetJobOutput!
+  getCompanies: GetCompaniesOutput!
+  getCompanyById(id: String!): GetCompanyOutput!
+}
+
+type Mutation {
+  createAccount(input: CreateUserInput!): UserOutput!
+  login(input: LoginUserInput!): UserOutput!
+  createJob(input: CreateJobInput!): CreateJobOutput!
+  updateJob(id: String!, input: UpdateJobInput!): UpdateJobOutput!
+  deleteJob(id: String!): GetJobOutput!
+  createCompany(input: CreateCompanyInput!): CreateCompanyOutput!
+  updateCompany(id: String!, input: UpdateCompanyInput!): UpdateCompanyOutput!
+  deleteCompany(input: DeleteCompanyInput!): GetCompanyOutput!
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+  role: String!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+input CreateJobInput {
+  title: String!
+  level: Level!
+  unit: String!
+  superior: String!
+  companyName: String!
+}
+
+input UpdateJobInput {
+  title: String
+  level: Level
+  unit: String
+  superior: String
+  companyName: String
+}
+
+input CreateCompanyInput {
+  name: String!
+}
+
+input UpdateCompanyInput {
+  name: String!
+}
+
+input DeleteCompanyInput {
+  id: ID!
+}
